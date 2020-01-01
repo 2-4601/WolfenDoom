@@ -10276,3 +10276,267 @@ Model CKPipeTopGold
 	Skin 0 "CK_PIPE3.png"
 	FrameIndex MDLA A 0 0	
 }
+
+Model NashGoreBloodSpot
+{
+	UseActorPitch
+	UseActorRoll
+	ZOffset 0.0001
+
+	Scale 1.0 1.0 1.0
+
+	// mesh
+	Path "models/nashgore/BloodSpot"
+	Model 0 "BloodSpot.md3"
+
+	// textures
+	//Path "graphics/decals"
+	Skin 0 "bsplat1.png"
+	FrameIndex NGMV A 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat2.png"
+	FrameIndex NGMV B 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat3.png"
+	FrameIndex NGMV C 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat4.png"
+	FrameIndex NGMV D 0 0
+}
+
+//===========================================================================
+//
+//
+//
+//===========================================================================
+
+Model NashGoreBloodSpotSmall
+{
+	UseActorPitch
+	UseActorRoll
+	ZOffset 0.0001
+
+	Scale 0.2 0.2 0.2
+
+	// mesh
+	Path "models/nashgore/BloodSpot"
+	Model 0 "BloodSpot.md3"
+
+	// textures
+	//Path "graphics/decals"
+	Skin 0 "bsplat_small1.png"
+	FrameIndex NGMV A 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat_small2.png"
+	FrameIndex NGMV B 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat_small3.png"
+	FrameIndex NGMV C 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat_small4.png"
+	FrameIndex NGMV D 0 0
+}
+
+//===========================================================================
+//
+//
+//
+//===========================================================================
+
+Model NashGoreBloodSpotCeiling
+{
+	UseActorPitch
+	UseActorRoll
+	ZOffset -2.2
+
+	Scale 1.0 1.0 1.0
+
+	// mesh
+	Path "models/nashgore/BloodSpot"
+	Model 0 "BloodSpot.md3"
+
+	// textures
+	//Path "graphics/decals"
+	Skin 0 "bsplat1.png"
+	FrameIndex NGMV A 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat2.png"
+	FrameIndex NGMV B 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat3.png"
+	FrameIndex NGMV C 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat4.png"
+	FrameIndex NGMV D 0 0
+}
+
+//===========================================================================
+//
+//
+//
+//===========================================================================
+
+Model NashGoreBloodSpotClassic
+{
+	UseActorPitch
+	UseActorRoll
+	ZOffset 0.0001
+
+	Scale 0.25 0.25 0.25
+
+	// mesh
+	Path "models/nashgore/BloodSpot"
+	Model 0 "BloodSpot.md3"
+
+	// textures
+	//Path "graphics/decals"
+	Skin 0 "bsplat_classic1.png"
+	FrameIndex NGMV A 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat_classic2.png"
+	FrameIndex NGMV B 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat_classic3.png"
+	FrameIndex NGMV C 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat_classic4.png"
+	FrameIndex NGMV D 0 0
+}
+
+//===========================================================================
+//
+//
+//
+//===========================================================================
+
+Model NashGoreBloodSpotClassicCeiling
+{
+	UseActorPitch
+	UseActorRoll
+	ZOffset -2.2
+
+	Scale 0.25 0.25 0.25
+
+	// mesh
+	Path "models/nashgore/BloodSpot"
+	Model 0 "BloodSpot.md3"
+
+	// textures
+	//Path "graphics/decals"
+	Skin 0 "bsplat_classic1.png"
+	FrameIndex NGMV A 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat_classic2.png"
+	FrameIndex NGMV B 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat_classic3.png"
+	FrameIndex NGMV C 0 0
+
+	//Path "graphics/decals"
+	Skin 0 "bsplat_classic4.png"
+	FrameIndex NGMV D 0 0
+}
+
+Model NashGoreCorpseBlood
+{
+	UseActorPitch
+	UseActorRoll
+	ZOffset 0.025
+
+	Scale 1.0 1.0 1.0
+
+	// mesh
+	Path "models/nashgore/CorpseBlood"
+	Model 0 "CorpseBlood.md3"
+	Skin 0 "CorpseBlood01.png"
+
+	// states
+	FrameIndex NGMV A 0 0
+	FrameIndex NGMV B 0 1
+}
+
+Model NashGoreFootprint
+{
+	UseActorPitch
+	UseActorRoll
+	AngleOffset -90
+	ZOffset 0.0005
+	Scale 0.25 0.25 0.25
+	Path "models/nashgore/Footprint"
+	Model 0 "Footprint.md3"
+	Skin 0 "Footprint01.png"
+	FrameIndex NGMV A 0 0
+}
+
+Model NashGoreWallBloodSmall
+{
+	AngleOffset 90
+	UseActorPitch
+	UseActorRoll
+	Offset 0.01 0 0
+	Scale 0.2 0.2 0.2
+
+	// mesh
+	Path "models/nashgore/WallBlood"
+	Model 0 "WallBlood.md3"
+
+	// textures
+	Path "models/nashgore/BloodSpot"
+	Skin 0 "bsplat_small1.png"
+	FrameIndex NGMV A 0 0
+
+	Path "models/nashgore/BloodSpot"
+	Skin 0 "bsplat_small2.png"
+	FrameIndex NGMV B 0 0
+
+	Path "models/nashgore/BloodSpot"
+	Skin 0 "bsplat_small3.png"
+	FrameIndex NGMV C 0 0
+
+	Path "models/nashgore/BloodSpot"
+	Skin 0 "bsplat_small4.png"
+	FrameIndex NGMV D 0 0
+}
+
+Model NashGoreWallBloodLarge
+{
+	AngleOffset 90
+	UseActorPitch
+	UseActorRoll
+	Offset 0.01 0 0
+
+	// mesh
+	Path "models/nashgore/WallBlood"
+	Model 0 "WallBlood.md3"
+
+	// textures
+	Path "models/nashgore/BloodSpot"
+	Skin 0 "bsplat1.png"
+	FrameIndex NGMV A 0 0
+
+	Path "models/nashgore/BloodSpot"
+	Skin 0 "bsplat2.png"
+	FrameIndex NGMV B 0 0
+
+	Path "models/nashgore/BloodSpot"
+	Skin 0 "bsplat3.png"
+	FrameIndex NGMV C 0 0
+
+	Path "models/nashgore/BloodSpot"
+	Skin 0 "bsplat4.png"
+	FrameIndex NGMV D 0 0
+}

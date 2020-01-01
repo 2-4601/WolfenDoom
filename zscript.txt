@@ -82,3 +82,21 @@ version "3.7.2"
 
 /// Miscellaneous
 #include "scripts/libraries/acstools.txt"
+
+/// Nashgore: Vengeance Edition
+#include "scripts/nashgore/NashGoreCommon.txt"
+#include "scripts/nashgore/NashGoreStatics.txt"
+#include "scripts/nashgore/NashGoreHandler.txt"
+#include "scripts/nashgore/NashGoreBlood.txt"
+#include "scripts/nashgore/NashGoreBloodPlane.txt"
+#include "scripts/nashgore/NashGoreGibs.txt"
+#include "scripts/nashgore/NashGoreCrushedGibs.txt"
+#include "scripts/nashgore/NashGoreSquishyGibs.txt"
+#include "scripts/nashgore/NashGoreIceChunk.txt"
+#include "scripts/nashgore/NashGoreLiquidBlood.txt"
+#include "scripts/nashgore/NashGoreWallBlood.txt"
+#include "scripts/nashgore/NashGoreActor.txt"
+#include "scripts/nashgore/NashGoreMenu.txt"
+
+// global constants
+const STAT_NashGore_Gore = Thinker.STAT_USER + 1;

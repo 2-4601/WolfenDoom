@@ -133,7 +133,6 @@
 #include "actors/models/base.txt"
 
 //Gore
-#include "actors/misc/nashgore.txt"
 #include "actors/misc/droplets.txt"
 
 //Misc
