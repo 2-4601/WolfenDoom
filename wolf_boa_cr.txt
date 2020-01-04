@@ -107,6 +107,7 @@ MODELS
 		Woman Statue from http://tf3dm.com/3d-model/statue-24805.html
 	Monolith Productions (No One Lives Forever 1 - Rooftop Antennae model, converted & modified by Ozymandias81)
 	Nicola3dModels (Moon skin from http://tf3dm.com/3d-model/moon-17150.html)
+	Nash Muhandes (Nash's Gore Mod: Vengeance Edition)
 	Ozymandias81 (COD1-2-UO & RTCW models, offsets & reskin, Destroyed Nebelwerfer3d, TestCrate, anims for 3d Chairs, Handrail, DecalBase model, Berleagle.md3 model, Usable Turret model from http://www.3dsociety.ru/3dmodels/3d-model-minigun converted then modified, Lids, Planks, Wartorn skins, BoATable1-2,)
 	Raven Software (Jedi Knight III, Hexen II)
 	Rex (a couple of Half-Life like models from Paranoid TC - not present anymore)
@@ -329,6 +330,7 @@ SPRITES
 	MaxED (Re-Exhumed Scorpion sprites, weapon HUD improvements (old), some brightmaps for textures)
 	Mind Shear Software (In Pursuit of Greed - sprites for MechaNazi Bosses with huge edits done by DoomJedi)
 	Monolith Software (Blood)
+	Nash Muhandes (Nash's Gore Mod: Vengeance Edition)
 	OSJClatchFord (BJKick - Recolored & reworked a bit by AFADoomer)
 	Ozymandias81:
 		Some Lowres / Hires Props [recolors, adjustments], Runes, Black Scorpion, Debris [with Torm667], lowres NaziLoper, improved Pyrolight, Hires frames [Pain/Prepare/Reload & AstroSuite], AstroLuger pickup sprite, Hires sprites retouches [nitpicks, bits, recolors], Oil pickup, Shop Stands (STNDF-I# frames), Tesla Cannon HUD sprites [with several bits from StunRifle weapon by Eriance / Amuscaria], ZyklonMonster, Zombified Ryan [with DoomJedi], ConfettiParticles frames, Civilian Zombies (recolors), Coat Hanger variants (CTHNB0-M0), Brass Cyanide Pill flutes (CYANA0-B0), Tea Set sprites
