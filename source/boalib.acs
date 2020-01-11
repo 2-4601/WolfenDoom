@@ -29,7 +29,6 @@ int lastwave = 0; // The previous wave (used for fallback spawnpoints if it's ni
 #include "functions.acs"
 #include "colorgrade.acs"
 #include "compass.acs"
-#include "droplets.acs"
 #include "flinch.acs"
 #include "gameplay.acs"
 #include "interactive.acs"

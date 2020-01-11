@@ -87,7 +87,6 @@
 #include "actors/sfx/terrainsplashes.txt"
 #include "actors/sfx/vollight.txt"
 #include "actors/sfx/creepyrift.txt"
-#include "actors/misc/painoverlay.txt"
 
 //Critters
 #include "actors/critters/bird.txt"
@@ -134,7 +133,7 @@
 #include "actors/models/base.txt"
 
 //Gore
-#include "actors/misc/droplets.txt"
+#include "actors/misc/painoverlay.txt"
 
 //Misc
 #include "actors/misc/civilians.txt"
