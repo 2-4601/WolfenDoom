@@ -42,7 +42,7 @@ gameinfo
 
 	defaultconversationmenuclass = "BoAConversationMenu"
 	MessageboxClass = "ClassicMessageBox"
-	eventhandlers = "InventoryClearHandler", "WaterHandler", "CustomShaderHandler", "SpriteShadowHandler", "MineSweeperHandler", "CompassHandler", "MapStatsHandler", "PersistentMapStatsHandler", "UnderlayRenderer"
+	eventhandlers = "InventoryClearHandler", "WaterHandler", "CustomShaderHandler", "SpriteShadowHandler", "MineSweeperHandler", "CompassHandler", "MapStatsHandler", "PersistentMapStatsHandler", "UnderlayRenderer", "NashGoreHandler"
 	statusbarclass = "BoAStatusBar"
 
 	ForceKillScripts = true //needed for Droplets - ozy81

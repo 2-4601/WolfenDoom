@@ -320,7 +320,6 @@ ACTOR BigSpider : Base
 	+NOINFIGHTING
 	+THRUGHOST
 	Translation "176:191=164:167" , "32:47=164:167"
-	BloodType "ScorpionBlood"
 	BloodColor "DarkOrange1"
 	SeeSound "spider1/sight"
 	PainSound "spider1/pain"
@@ -420,7 +419,6 @@ ACTOR Scorpion : Base
 	+NOINFIGHTING
 	+NOTRIGGER
 	Species "Nazi"
-	BloodType "ScorpionBlood"
 	BloodColor "DarkOrange1"
 	DeathSound "rat/death"
 	Obituary "$SCORPSML"

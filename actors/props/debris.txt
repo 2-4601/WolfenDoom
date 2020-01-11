@@ -682,7 +682,7 @@ ACTOR Debris_FatFlesh : Debris_Flesh
 	States
 	{
 	Spawn:
-		BUTC UVW 2 NODELAY { A_JumpIf(waterlevel == 3, "AdjustMass"); A_SpawnItemEx("NashGore_FlyingBlood", random(-2,2), random(-2,2), random(-2,2), random(1,3), random(1,3), random(1,3), angle, SXF_TRANSFERTRANSLATION|SXF_USEBLOODCOLOR|SXF_TRANSFERROLL); }
+		BUTC UVW 2 NODELAY { A_JumpIf(waterlevel == 3, "AdjustMass"); A_SpawnItemEx("Blood", random(-2,2), random(-2,2), random(-2,2), random(1,3), random(1,3), random(1,3), angle, SXF_TRANSFERTRANSLATION|SXF_USEBLOODCOLOR|SXF_TRANSFERROLL); }
 		Loop
 	}
 }

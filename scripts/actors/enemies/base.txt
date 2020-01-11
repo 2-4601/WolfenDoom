@@ -1142,7 +1142,7 @@ class Nazi : Base
 			"####" AAA 1 A_NaziChase(null, null);
 			"####" A 1 A_NaziChase;
 			"####" AAA 1 A_NaziChase(null, null);
-			"####" B 0 {A_PlaySound("floor/heavy", CHAN_AUTO); A_SpawnItemEx("NashGore_BloodSplasher", 0, 0, 0, frandom(-2.0, 2.0), frandom(-2.0, 2.0), frandom(1.0, 2.0), random(0, 360), SXF_TRANSFERTRANSLATION | SXF_ABSOLUTEPOSITION | SXF_ABSOLUTEANGLE | SXF_ABSOLUTEVELOCITY, 0);}
+			"####" B 0 {A_PlaySound("floor/heavy", CHAN_AUTO); A_SpawnItemEx("Blood", 0, 0, 0, frandom(-2.0, 2.0), frandom(-2.0, 2.0), frandom(1.0, 2.0), random(0, 360), SXF_TRANSFERTRANSLATION | SXF_ABSOLUTEPOSITION | SXF_ABSOLUTEANGLE | SXF_ABSOLUTEVELOCITY, 0);}
 			"####" B 1 A_NaziChase;
 			"####" BBB 1 A_NaziChase(null, null);
 			"####" B 1 A_NaziChase;
@@ -1152,7 +1152,7 @@ class Nazi : Base
 			"####" CCC 1 A_NaziChase(null, null);
 			"####" C 1 A_NaziChase;
 			"####" CCC 1 A_NaziChase(null, null);
-			"####" D 0 {A_PlaySound("floor/heavy", CHAN_AUTO); A_SpawnItemEx("NashGore_FlyingBlood", 0, 0, 0, frandom(0.1, 1.0) * RandomPick(-1, 1), frandom(0.1, 1.0) * RandomPick(-1, 1), frandom(0.0, 2.0), 0, SXF_TRANSFERTRANSLATION | SXF_ABSOLUTEPOSITION | SXF_ABSOLUTEANGLE | SXF_ABSOLUTEVELOCITY, 0);}
+			"####" D 0 {A_PlaySound("floor/heavy", CHAN_AUTO); A_SpawnItemEx("Blood", 0, 0, 0, frandom(0.1, 1.0) * RandomPick(-1, 1), frandom(0.1, 1.0) * RandomPick(-1, 1), frandom(0.0, 2.0), 0, SXF_TRANSFERTRANSLATION | SXF_ABSOLUTEPOSITION | SXF_ABSOLUTEANGLE | SXF_ABSOLUTEVELOCITY, 0);}
 			"####" D 1 A_NaziChase;
 			"####" DDD 1 A_NaziChase(null, null);
 			"####" D 1 A_NaziChase;
@@ -2181,7 +2181,7 @@ class NaziStandard : Nazi
 			Stop;
 		XDeath:
 			SLOP A 5 {
-				A_SpawnItemEx("NashGore_FlyingBlood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
+				A_SpawnItemEx("Blood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
 				A_SetScale(0.65);
 				bIsMonster = False; // So that an exploded enemy can't be resurrected
 			}
@@ -2191,7 +2191,7 @@ class NaziStandard : Nazi
 			Stop;
 		XDeath.Giant:
 			SLOP A 5 {
-				A_SpawnItemEx("NashGore_FlyingBlood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
+				A_SpawnItemEx("Blood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
 				A_SetScale(2.90);
 				bIsMonster = False; // So that an exploded enemy can't be resurrected
 			}
@@ -2201,12 +2201,12 @@ class NaziStandard : Nazi
 			Stop;
 		XDeath.Boom:
 			SLOP A 5 {
-				A_SpawnItemEx("NashGore_FlyingBlood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
+				A_SpawnItemEx("Blood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
 				A_SetScale(0.65);
 				bIsMonster = False; // So that an exploded enemy can't be resurrected
 			}
 			"####" A 0 A_SpawnItemEx("PanzerBoom", 0, 0, 8);
-			"####" BCDE 5 A_SpawnItemEx("NashGore_FlyingBlood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
+			"####" BCDE 5 A_SpawnItemEx("Blood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
 			"####" F 5 A_UnblockAndDrop();
 			"####" G -1;
 			Stop;
@@ -2259,7 +2259,6 @@ class MutantStandard : Nazi
 		PainSound "mutant/pain";
 		DeathSound "mutant/Death";
 		BloodColor "Purple";
-		BloodType "MutantBlood";
 		Translation "16:47=[205,0,215]:[40,0,96]","168:191=[205,0,215]:[40,0,96]";
 	}
 
@@ -2324,7 +2323,7 @@ class MutantStandard : Nazi
 			Stop;
 		XDeath:
 			SLOM A 5 {
-				A_SpawnItemEx("MutantFlyingBlood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
+				A_SpawnItemEx("Blood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
 				A_SetScale(0.62);
 				bIsMonster = False; // So that an exploded enemy can't be resurrected
 			}
@@ -2334,7 +2333,7 @@ class MutantStandard : Nazi
 			Stop;
 		XDeath.Big:
 			SLOM A 5 {
-				A_SpawnItemEx("MutantFlyingBlood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
+				A_SpawnItemEx("Blood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
 				A_SetScale(0.95);
 				bIsMonster = False; // So that an exploded enemy can't be resurrected
 			}
@@ -2476,7 +2475,7 @@ class ZombieStandard : Nazi
 			Stop;
 		XDeath:
 			SLOZ A 5 {
-				A_SpawnItemEx("Zombie_FlyingBlood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
+				A_SpawnItemEx("Blood", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176);
 				A_SetScale(0.65);
 				bIsMonster = False; // So that an exploded enemy can't be resurrected
 			}

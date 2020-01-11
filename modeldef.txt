@@ -10299,6 +10299,12 @@ Model CKWallShooter
 	FrameIndex MDLA A 0 0
 }
 
+//===========================================================================
+//
+// Nashgore: Vengeance Edition
+//
+//===========================================================================
+
 Model NashGoreBloodSpot
 {
 	UseActorPitch

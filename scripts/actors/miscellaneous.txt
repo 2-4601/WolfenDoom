@@ -744,3 +744,16 @@ class Bubble : Actor
 		Super.Tick();
 	}
 }
+
+// Shortcut for DECORATE, so that actors don't have to be ported to ZScript
+// Note that SXF_SETTARGET is needed for this
+class VengeanceGibsSpawner : Actor
+{
+	override void PostBeginPlay()
+	{
+		if (target)
+		{
+			NashGoreGibs.SpawnGibs(target);
+		}
+	}
+}

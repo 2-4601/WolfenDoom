@@ -87,6 +87,7 @@
 #include "actors/sfx/terrainsplashes.txt"
 #include "actors/sfx/vollight.txt"
 #include "actors/sfx/creepyrift.txt"
+#include "actors/misc/painoverlay.txt"
 
 //Critters
 #include "actors/critters/bird.txt"

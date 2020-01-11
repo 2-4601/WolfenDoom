@@ -26,7 +26,6 @@ ACTOR AngelOfDeath : Base
 	ActiveSound "aode/active"
 	PainSound "aode/pain"
 	DeathSound "aode/death"
-	BloodType "BossBlood"
 	BloodColor "DarkSeaGreen"
 	DamageFactor "Rocket", 0.2
 	States
