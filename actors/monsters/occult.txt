@@ -69,7 +69,7 @@ ACTOR ZyklonSkull : BloodSkull
 	DamageFactor "UndeadPoison", 0
 	DamageFactor "Poison", 0
 	BloodColor "00 A0 7D"
-	BloodType "ZombieBlood"
+	BloodType "Blood"
 	RenderStyle "Translucent"
 	Alpha 0.8
 	+VISIBILITYPULSE

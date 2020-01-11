@@ -193,7 +193,7 @@ ACTOR ZBatFamiliar : BatFamiliar
 	DamageFactor "UndeadPoison", 0
 	DamageFactor "Poison", 0
 	BloodColor "00 A0 7D"
-	BloodType "ZombieBlood"
+	BloodType "Blood"
 	HitObituary "$ZBAT"
 	States
 	{

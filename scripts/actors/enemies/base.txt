@@ -2372,7 +2372,7 @@ class ZombieStandard : Nazi
 		PainSound "nazombie/pain";
 		SeeSound "nazombie/sighted";
 		BloodColor "00 A0 7D";
-		BloodType "ZombieBlood";
+		BloodType "Blood";
 		MaxStepHeight 28;
 		MaxDropoffHeight 28;
 		Species "Zombie";

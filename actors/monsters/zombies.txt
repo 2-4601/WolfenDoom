@@ -543,7 +543,7 @@ ACTOR ZombieGeneral : RocketMan
 	PainSound "nazombie/pain"
 	DeathSound "nazombie/act"
 	BloodColor "00 A0 7D"
-	BloodType "ZombieBlood"
+	BloodType "Blood"
 	DamageFactor "Electric", 0.8
 	DamageFactor "Fire", 1.2
 	DamageFactor "MutantPoison", 0
@@ -607,7 +607,7 @@ ACTOR ZombieZyklonstein : RocketMan
 	PainSound "nazombie/pain"
 	DeathSound "nazombie/act"
 	BloodColor "00 A0 7D"
-	BloodType "ZombieBlood"
+	BloodType "Blood"
 	DamageFactor "Electric", 0.8
 	DamageFactor "Fire", 1.2
 	DamageFactor "MutantPoison", 0
@@ -668,7 +668,7 @@ ACTOR ZombieButcher : RocketMan
 	PainSound "nazombie/pain"
 	DeathSound "nazombie/act"
 	BloodColor "00 A0 7D"
-	BloodType "ZombieBlood"
+	BloodType "Blood"
 	DamageFactor "Electric", 0.8
 	DamageFactor "Fire", 1.2
 	DamageFactor "MutantPoison", 0
