@@ -138,7 +138,7 @@ class CKBaseEnemy : Actor
 		{
 			if (stunframes > 1) { frame += Random(0, stunframes - 1); } // Pick a random frame within set range
 			stuncounter = stuntime;
-			A_SetSize(Default.Radius, Default.Height / 2);
+			A_SetSize(Default.Radius, 0);
 			bNotAutoAimed = true;
 
 			stunned = true;
@@ -178,7 +178,7 @@ class CKBaseEnemy : Actor
 
 			if (counter == 0)
 			{
-				vel.z = 17.0;
+				vel.z = 20.0;
 			}
 			else
 			{
@@ -266,15 +266,6 @@ mixin class CKPickup
 
 	Property VSpeed:vspeed;
 
-	Default
-	{
-		//$Category Commander Keen (BoA)/Pickups
-		//$Color 17
-
-		Scale 2.0;
-		+NOGRAVITY
-	}
-
 	States(Actor)
 	{
 		HideDoomish:
@@ -303,7 +294,7 @@ mixin class CKPickup
 
 	override void Touch(Actor toucher)
 	{
-		if (toucher.player && !touched)
+		if ((toucher.player || toucher is "CKSmirky") && !touched)
 		{
 			touched = toucher;
 			ticker = 12;
@@ -351,6 +342,7 @@ class CKTreasure : StackableInventory
 	Default
 	{
 		+COUNTITEM
+		+NOGRAVITY
 
 		Inventory.MaxAmount 10000000;
 		Inventory.PickupFlash "";
@@ -358,6 +350,7 @@ class CKTreasure : StackableInventory
 		+INVENTORY.UNDROPPABLE
 
 		CKTreasure.VSpeed 4;
+		Scale 2.0;
 	}
 
 	override bool ShouldStay ()
@@ -374,10 +367,13 @@ class CKHealth : Health
 
 	Default
 	{
+		+NOGRAVITY
+
 		Inventory.PickupFlash "";
 		Inventory.PickupSound "ckeen/pickup";
 
 		CKHealth.VSpeed 4;
+		Scale 2.0;
 	}
 
 	override bool ShouldStay ()
@@ -396,6 +392,7 @@ class CKPuzzleItem : PuzzleItem
 	{
 		//$Category Commander Keen (BoA)/Items
 		//$Color 13
+		+NOGRAVITY
 
 		Inventory.MaxAmount 1;
 		Inventory.PickupFlash "";
@@ -403,6 +400,7 @@ class CKPuzzleItem : PuzzleItem
 		-INVENTORY.INVBAR
 
 		CKPuzzleItem.VSpeed 4;
+		Scale 2.0;
 	}
 
 	override bool ShouldStay ()
@@ -421,10 +419,12 @@ class CKWeapon : Weapon
 	{
 		//$Category Commander Keen (BoA)/Weapons
 		//$Color 14
+		+NOGRAVITY
 
 		Inventory.PickupFlash "";
 
 		CKWeapon.VSpeed 4;
+		Scale 2.0;
 	}
 }
 
@@ -1387,19 +1387,23 @@ class CKWormouth : CKBaseEnemy
 			CKSN D 4
 			{
 				A_Face(target);
-				vel.xy = RotateVector((1, 0), angle);
 				bSolid = true;
 				A_PlaySound("ckeen/wormouth/attack");
-				SetDamage(15);
 			}
 			CKSN E 4;
-			CKSN F 8;
-			CKSN ED 4;
+			CKSN F 8
+			{
+				vel.xy = RotateVector((1, 0), angle);
+				SetDamage(15); // Damage on the 'biting' frame only
+			}
+			CKSN ED 4
+			{
+				SetDamage(0);
+			}
 			CKLC F 0
 			{
 				if (target && Distance2D(target) < 16) { SetState(AttackState); return; }
 				bSolid = false;
-				SetDamage(0);
 			}
 			Goto See;
 	}
@@ -1637,7 +1641,11 @@ class CKSmirky : CKBaseEnemy
 		{
 			Vector3 goalpos = goal.pos;
 
-			if (Inventory(goal).CallTryPickup(self))
+			if (
+				Inventory(goal).CallTryPickup(self) &&
+				!(goal is "CKTreasure" && CKTreasure(goal).touched) &&
+				!(goal is "CKPuzzleItem" && CKPuzzleItem(goal).touched)
+			)
 			{
 				Spawn("CKStolenItem", goalpos);
 				A_PlaySound("ckeen/smirky/steal");
@@ -2023,7 +2031,8 @@ class CKSchoolfish : CKBaseEnemy
 
 class CKInchworm : CKBaseEnemy
 {
-	int turncounter, lasttouch, count;
+	Array<Actor> touchers;
+	int turncounter;
 
 	Default
 	{
@@ -2035,7 +2044,7 @@ class CKInchworm : CKBaseEnemy
 		Radius 18;
 		Height 20;
 		Damage 0;
-		MaxStepHeight 0;
+		MaxStepHeight 16;
 		+NOTAUTOAIMED
 		CKBaseEnemy.StunTime 0;
 	}
@@ -2045,7 +2054,7 @@ class CKInchworm : CKBaseEnemy
 		Spawn:
 			CKWM A Random(0, 15);
 		See:
-			CKWM AB 15 CK_InchwormMove();
+			CKWM AAABBB 5 CK_InchwormMove();
 			Loop;
 	}
 
@@ -2055,33 +2064,32 @@ class CKInchworm : CKBaseEnemy
 
 		if (!target) { return; }
 
-		bool blocked = BlockingLine || BlockingMobj || !TryMove(pos.xy + RotateVector((Speed, 0), angle), false);
+		if (turncounter) { turncounter--; }
 
-		if (turncounter > 0) { turncounter--; }
+		NewChaseDir();
 
-		if (!turncounter)
+		if (absangle(angle, AngleTo(target)) > 135 && !turncounter) { movedir = (movedir + 4) % 8; } // Turn around after a short while if you're facing away from the player
+
+		MonsterMove();
+
+		angle = movedir * 45;
+		if (!turncounter) { turncounter = 6; } // Set the timeout for how long until you turn around if you are facing away from the player
+
+		for (int i = 0; i < touchers.Size(); i++)
 		{
-			if (blocked || !target || !IsVisible(target, true)) { angle = Random(0, 359); }
-			else { angle = AngleTo(target); }
-
-			turncounter = 5;
+			if (touchers[i] && Distance3D(touchers[i]) > 32.0) { touchers.Delete(i); }
 		}
+
 	}
 
 	override bool CanCollideWith(Actor other, bool passive)
 	{
 		// Don't collide with anything, but keep count of how many inchworms are overlapping right now
-		if (other is "CKInchWorm")
+		if (other.bSolid && other is "CKInchWorm" && target && Distance3D(target) <= 32)
 		{
-			if (lasttouch != level.time)
-			{
-				lasttouch = level.time;
-				count = 0;
-			}
+			if (touchers.Find(other) == touchers.Size()) { touchers.Push(other); }
 
-			count++;
-
-			if (count == 11)
+			if (touchers.Size() == 11)
 			{
 				DoEasterEgg();
 			}
@@ -2096,27 +2104,16 @@ class CKInchworm : CKBaseEnemy
 		ThinkerIterator it = ThinkerIterator.Create("CKFoot", Thinker.STAT_DEFAULT);
 		if (it.Next()) { return; }
 
-		// Use a spot 64 units in front of the player as the focus of the spawn.
-		if (target.player && Distance3D(target) < 32)
+		// Execute the inchworms' special...
+		Level.ExecuteSpecial(special, self, null, false, args[0], args[1], args[2], args[3], args[4]);
+
+		// Remove the inchworms.
+		it = ThinkerIterator.Create("CKInchworm", Thinker.STAT_DEFAULT);
+		Actor mo;
+
+		while (mo = Actor(it.Next()))
 		{
-			// This was an easter egg in CK4 that transported you to the secret map...  What to do here?
-			Console.Printf("12 inches in a foot... lol");
-
-			Vector3 newpos = pos;
-			newpos = target.pos + RotateVector((64, 0), target.angle);
-
-			Spawn("CKFootSmoke", newpos + (Random(0, 32), 0, Random(0, 32)));
-			Spawn("CKFootSmoke", newpos + (-Random(0, 32), 0, Random(0, 32)));
-			Spawn("CKFootSmoke", newpos + (0, Random(0, 32), Random(0, 32)));
-			Spawn("CKFootSmoke", newpos + (0, -Random(0, 32), Random(0, 32)));
-
-			Spawn("CKFoot", newpos);
-
-			// Remove the inchworms.
-			it = ThinkerIterator.Create("CKInchworm", Thinker.STAT_DEFAULT);
-			Actor mo;
-
-			while (mo = Actor(it.Next())) { mo.Destroy(); }
+			mo.Destroy();
 		}
 	}
 }
@@ -2814,6 +2811,41 @@ class CKBounder : CKBaseEnemy
 	}
 }
 
+class CKFoot : CKBaseEnemy
+{
+	Default
+	{
+		//$Category Commander Keen (BoA)/Props
+		//$Title Foot (secret access)
+		//$Color 3
+
+		Radius 32;
+		Height 64;
+		Damage 0;
+		+FRIENDLY
+		+NOGRAVITY
+		+NOTAUTOAIMED
+		CKBaseEnemy.StunTime 0;
+	}
+
+	States
+	{
+		Spawn:
+			CKFT A -1;
+			Loop;
+	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+
+		Spawn("CKFootSmoke", pos + (Random(0, 32), 0, Random(0, 32)));
+		Spawn("CKFootSmoke", pos + (-Random(0, 32), 0, Random(0, 32)));
+		Spawn("CKFootSmoke", pos + (0, Random(0, 32), Random(0, 32)));
+		Spawn("CKFootSmoke", pos + (0, -Random(0, 32), Random(0, 32)));
+	}
+}
+
 class CKFootSmoke : Actor
 {
 	Default
@@ -2846,7 +2878,11 @@ class CKBerkeloid : CKBaseEnemy
 		Speed 4;
 		Radius 15;
 		Height 43;
+		Renderstyle "Add";
+		Alpha 0.95;
+		+BRIGHT
 		+NODROPOFF
+		+VISIBILITYPULSE
 		Obituary "$CK_BERKELOID";
 		CKBaseEnemy.StunTime 0;
 		CKBerkeloid.VSpeed 1.0;
@@ -3076,7 +3112,7 @@ class CKSkyPest : CKBaseEnemy
 
 }
 
-class CKSpear : CKBaseEnemy
+class CKSpearDown : CKBaseEnemy
 {
 	int dir;
 	int user_delay;
@@ -3164,8 +3200,7 @@ class CKSpear : CKBaseEnemy
 
 }
 
-
-class CKSpearUp : CKSpear
+class CKSpearUp : CKSpearDown
 {
 	Default
 	{
@@ -3226,6 +3261,65 @@ class CKSpearUp : CKSpear
 		}
 
 		SetOrigin((pos.xy, SpawnPoint.z + counter), true);
+	}
+}
+
+class CKSpear : CKSpearUp
+{
+	Default
+	{
+		//$Title Spears (Pitched)
+		+NOCLIP
+		-SOLID
+		+WALLSPRITE
+		+ROLLSPRITE
+	}
+
+	override void CK_SpearThrust()
+	{
+		SetDamage(15);
+		bSolid = true;
+
+		if (dir > 0 && counter - 8 > 0)
+		{
+			counter -= 8;
+		}
+		else if (dir < 0 && counter + 8 < 72)
+		{
+			counter += 8;
+		}
+		else
+		{
+			dir *= -1;
+		}
+
+		if (counter <= 0) { frame = 3; }
+		else if (counter < 40) { frame = 4; }
+		else { frame = 5; }
+
+		if (counter <= 8 && dir == 1)
+		{
+			counter = 0;
+			bSolid = false;
+
+			SetState(SeeState);
+			SetDamage(0);
+		}
+
+		SetOrigin((SpawnPoint.xy + RotateVector((counter * sin(roll), 0), angle + 90), SpawnPoint.z + counter * cos(roll)), true);
+	}
+
+	override void PostBeginPlay()
+	{
+		if (pitch == 90 || pitch == 270) { bWallSprite = false; }
+
+		if (pos.z == ceilingz) { SetOrigin((pos.xy, pos.z - 7), true); }
+
+		angle -= 90;
+		roll = pitch + 90;
+		pitch = 0;
+
+		Super.PostBeginPlay();
 	}
 }
 
@@ -3305,5 +3399,106 @@ class CKStunnerBall : Actor
 		}
 
 		Super.Tick();
+	}
+}
+
+class CKWallShooter : SwitchableDecoration
+{
+	int user_fireoffset; // Number of tics to offset firing pattern from other Wall Shooters
+
+	Default
+	{
+		//$Category Commander Keen (BoA)/Special
+		//$Title Wall Shooter (3D)
+		//$Color 4
+
+		+NOGRAVITY
+		+WALLSPRITE
+		+NODAMAGE
+		+DONTTHRUST
+		-SOLID
+		Radius 1;
+		Height 0;
+		Obituary "$CK_WALSH";
+	}
+
+	States
+	{
+		Spawn:
+		Active:
+			MDLA A 10 CK_WaitForPlayer(1024); // Don't fire until a player is around...
+			Loop;
+		See:
+			MDLA A 1
+			{
+				// Synchronize all wall shooters
+				if (level.time % (70 + user_fireoffset) == 0) { A_SpawnProjectile("CKWallShooterArrow", 0, 0, 0, CMF_AIMDIRECTION | CMF_SAVEPITCH, pitch); }
+
+				if (target && !IsVisible(target, true) && Distance2D(target) > 1024)
+				{
+					target = null;
+					SetState(SpawnState);
+				}
+			}
+			Loop;
+		Inactive:
+			MDLA A 1;
+			Loop;
+	}
+
+	void CK_WaitForPlayer(int dist = 256)
+	{
+		LookForPlayers(true);
+
+		if (target && Distance2D(target) < dist)
+		{
+			SetState(SeeState);
+		}
+	}
+}
+
+class CKWallShooterArrow : Actor
+{
+	Default
+	{
+		PROJECTILE;
+		+WALLSPRITE
+		+ROLLSPRITE
+		+NOCLIP
+		Radius 8;
+		Height 8;
+		Damage 16;
+		Speed 16;
+		Seesound "ckeen/blowgun";
+		Deathsound "ckeen/klick";
+	}
+
+	States
+	{
+		Spawn:
+			CKAR F 2 NODELAY A_Playsound(SeeSound);
+			CKAR F 0 { bNoClip = false; } // Only NoClip for first few ticks to make sure these can fire when placed against walls
+			CKAR EF 8;
+			Loop;
+		Death:
+			TNT1 A 0;
+			Stop;
+	}
+
+	override void PostBeginPlay()
+	{
+		// If fired straight up or down, always face the player for visibility purposes
+		if (pitch == 90 || pitch == 270)
+		{
+			bWallSprite = false;
+			pitch -= 180;
+		}
+
+		// Adjust for WallSprite offset and to change firing pitch to sprite roll amount
+		angle -= 90;
+		roll = pitch;
+		pitch = 0;
+
+		Super.PostBeginPlay();
 	}
 }

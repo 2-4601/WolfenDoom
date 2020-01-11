@@ -384,10 +384,17 @@ map C3M6_B lookup "C3M6"	//DoomJuan
 	next = CREDITSM
 }
 
-map C3M0_A lookup "C3M0"	//Tormentor667
+map C3M0_A lookup "C3M0_A"	//Tormentor667
 {
 	levelnum = 103
 	music = "C3M0AMUS"
+	cluster = 1
+}
+
+map C3M0_B lookup "C3M0_B"	//Tormentor667
+{
+	levelnum = 104
+	music = "C3M0BMUS"
 	cluster = 1
 }
 
@@ -664,6 +671,7 @@ DoomEdNums
 	8181=CinderSpawner
 	8182=CinderSpawnerSky
 	8183=LeavesSpawner
+	8184=LeavesSpawnerHorizontal
 	8185=ConfettiSpawner
 	8186=SnowSpawner
 	8187=RainSpawner
@@ -697,6 +705,7 @@ DoomEdNums
 	8910=Camel
 	10000=CloudSpawner
 	10018=BigSpider
+	10019=MiniSpider
 	10151=BreakableVase1
 	10152=BreakableVase2
 	10153=BreakableVase3
@@ -712,6 +721,7 @@ DoomEdNums
 	10313=BoulderStartGreyHugger
 	10315=GroundSpikes
 	10320=CobwebBody
+	10321=CobwebNest
 	10420=LavaCauldron
 	10421=CraterGrass
 	10422=NiceBush1
@@ -2068,10 +2078,11 @@ DoomEdNums
 	28048=CKJawbreaker
 	28049=CKGum
 	28050=CKFoot
-	28051=CKSpear
+	28051=CKSpearDown
 	28052=CKSpearUp
 	28053=CKBerkeloid
 	28054=CKSkyPest
+	28055=CKSpear
 	28100=CKPlatform
 	28101=CKPlatformFalling
 	28102=CKPlatformVertical
@@ -2090,6 +2101,9 @@ DoomEdNums
 	25108=StatistVolkoff
 	25109=StatistAFA
 	25110=StatistZhukov
+	25111=StatistStierlitz1
+	25112=StatistStierlitz2
+	25113=StatistStierlitz3
 	29395=BubbleSpawner
 	29990=BomberInAir_C3M2
 	29991=BomberInAir
@@ -2202,6 +2216,7 @@ DoomEdNums
 	31763=RTCWTable1D
 	31764=RTCWTable2D
 	31765=RTCWTable3D
+	31766=SovietRadio
 	31770=Lids1
 	31771=Lids2
 	31772=Lids3
